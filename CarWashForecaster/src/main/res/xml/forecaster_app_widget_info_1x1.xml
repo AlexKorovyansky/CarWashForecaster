@@ -1,0 +1,9 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:minWidth="110dp"
+                    android:minHeight="110dp"
+                    android:updatePeriodMillis="900000"
+                    android:previewImage="@drawable/ic_car_wash"
+                    android:initialLayout="@layout/forecaster_app_widget"
+                    android:resizeMode="none"
+                    android:widgetCategory="home_screen">
+</appwidget-provider>
