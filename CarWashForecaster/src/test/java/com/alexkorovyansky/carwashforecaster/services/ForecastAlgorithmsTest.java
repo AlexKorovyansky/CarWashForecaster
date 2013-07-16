@@ -132,7 +132,7 @@ public class ForecastAlgorithmsTest {
         final float actualForecast = ForecastAlgorithms.makeForecast(rainsArray);
         pprintForecastResults(rainsArray, actualForecast);
 
-        Assert.assertEquals(100.0f, actualForecast, 1e-10);
+        Assert.assertEquals(99.0f, actualForecast, 1e-10);
     }
 
     @Test
