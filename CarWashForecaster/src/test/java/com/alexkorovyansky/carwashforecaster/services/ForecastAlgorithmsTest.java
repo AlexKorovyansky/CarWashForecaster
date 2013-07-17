@@ -5,10 +5,6 @@ package com.alexkorovyansky.carwashforecaster.services;
  */
 
 import org.junit.Assert;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -18,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-@RunWith(RobolectricTestRunner.class)
-@Config(manifest=Config.NONE)
 public class ForecastAlgorithmsTest {
 
     @Test
