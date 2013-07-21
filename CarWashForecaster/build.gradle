@@ -35,7 +35,37 @@ android {
         minSdkVersion 8
         targetSdkVersion 17
     }
+
+    signingConfigs {
+        release {
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
 }
+
+// If you want to make signed release build, you can run in terminal
+
+// $ ./gradlew -PkeystoreFile=/path/to/key/store
+//            -PkeystorePassword=keystore_password
+//            -PkeyAlias=key_alias
+//            -PkeyPassword=key_password
+//      assembleRelease
+
+if (project.hasProperty('keystoreFile')
+        && project.hasProperty('keystorePassword')
+        && project.hasProperty('keyAlias')
+        && project.hasProperty('keyPassword')) {
+    android.signingConfigs.release.storeFile = file(keystoreFile)
+    android.signingConfigs.release.storePassword = keystorePassword
+    android.signingConfigs.release.keyAlias = keyAlias
+    android.signingConfigs.release.keyPassword = keyPassword
+}
+
 
 task localTest(type: Test, dependsOn: assemble) {
     testClassesDir = sourceSets.testLocal.output.classesDir

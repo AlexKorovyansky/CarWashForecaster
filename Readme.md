@@ -1,4 +1,26 @@
 Car Wash Forecaster
 ===================
 
-Android application (app widget), that smartly answers the question: is now good time to wash your car or not?
+Android application (App Widget) to simple answer the question, whether today is a good day for car wash or not?
+
+Developed By
+===================
+
+* Alex Korovyansky (korovyansk@gmail.com)
+
+License
+=======
+
+    Copyright 2013 Alex Korovyansky
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.

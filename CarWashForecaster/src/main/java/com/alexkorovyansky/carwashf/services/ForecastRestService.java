@@ -1,4 +1,4 @@
-package com.alexkorovyansky.carwashforecaster.services;
+package com.alexkorovyansky.carwashf.services;
 
 import com.google.gson.annotations.SerializedName;
 

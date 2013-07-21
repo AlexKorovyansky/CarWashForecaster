@@ -1,4 +1,4 @@
-package com.alexkorovyansky.carwashforecaster.services;
+package com.alexkorovyansky.carwashf.services;
 
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -12,9 +12,9 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.alexkorovyansky.carwashforecaster.ForecasterAppWidgetProvider;
-import com.alexkorovyansky.carwashforecaster.R;
-import com.alexkorovyansky.carwashforecaster.data.ForecastStorage;
+import com.alexkorovyansky.carwashf.ForecasterAppWidgetProvider;
+import com.alexkorovyansky.carwashf.R;
+import com.alexkorovyansky.carwashf.data.ForecastStorage;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;

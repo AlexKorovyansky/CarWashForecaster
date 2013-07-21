@@ -1,4 +1,4 @@
-package com.alexkorovyansky.carwashforecaster.services;
+package com.alexkorovyansky.carwashf.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
