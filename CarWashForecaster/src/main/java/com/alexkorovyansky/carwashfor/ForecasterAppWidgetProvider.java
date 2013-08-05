@@ -1,4 +1,4 @@
-package com.alexkorovyansky.carwashf;
+package com.alexkorovyansky.carwashfor;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -10,9 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import com.alexkorovyansky.carwashf.data.ForecastStorage;
-import com.alexkorovyansky.carwashf.services.ForecastAlgorithms;
-import com.alexkorovyansky.carwashf.services.ForecastIntentService;
+import com.alexkorovyansky.carwashfor.data.ForecastStorage;
+import com.alexkorovyansky.carwashfor.services.ForecastAlgorithms;
+import com.alexkorovyansky.carwashfor.services.ForecastIntentService;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.alexkorovyansky.carwashf.services;
+package com.alexkorovyansky.carwashfor.services;
 
 import android.graphics.Color;
 

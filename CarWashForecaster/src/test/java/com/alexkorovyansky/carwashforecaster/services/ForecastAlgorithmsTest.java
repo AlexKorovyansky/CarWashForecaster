@@ -1,4 +1,4 @@
-package com.alexkorovyansky.carwashf.services;
+package com.alexkorovyansky.carwashfor.services;
 
 /**
  * Created by akorovyansky on 7/15/13.

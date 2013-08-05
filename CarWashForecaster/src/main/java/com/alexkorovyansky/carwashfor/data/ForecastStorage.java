@@ -1,4 +1,4 @@
-package com.alexkorovyansky.carwashf.data;
+package com.alexkorovyansky.carwashfor.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
