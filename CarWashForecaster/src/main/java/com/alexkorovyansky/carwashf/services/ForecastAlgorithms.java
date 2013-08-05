@@ -1,5 +1,7 @@
 package com.alexkorovyansky.carwashf.services;
 
+import android.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -62,6 +64,31 @@ public class ForecastAlgorithms {
         }
 
         return result;
+    }
+
+    /**
+     * 0% - RED
+     * 50% - YELLOW
+     * 100% - GREEN
+     * @param forecast
+     * @return
+     */
+    public static int calculateForecastColor(int forecast) {
+        if (forecast <= 50) {
+            return calculateGradient(Color.RED, Color.YELLOW, 0, 50, forecast);
+        } else {
+            return calculateGradient(Color.YELLOW, Color.GREEN, 50, 100, forecast);
+        }
+
+    }
+
+    public static int calculateGradient(int startColor, int endColor, int startValue, int endValue, int value) {
+        final float f = (float) value / (endValue - startValue);
+        final int alpha = 255;
+        final int red = (int) (Color.red(startColor) + (Color.red(endColor) - Color.red(startColor)) * f);
+        final int blue = (int) (Color.blue(startColor) + (Color.blue(endColor) - Color.blue(startColor)) * f);
+        final int green = (int) (Color.green(startColor) + (Color.green(endColor) - Color.green(startColor)) * f);
+        return Color.argb(alpha, red, green, blue);
     }
 
     private ForecastAlgorithms(){

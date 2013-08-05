@@ -5,11 +5,13 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
 import com.alexkorovyansky.carwashf.data.ForecastStorage;
+import com.alexkorovyansky.carwashf.services.ForecastAlgorithms;
 import com.alexkorovyansky.carwashf.services.ForecastIntentService;
 
 import java.util.Date;
@@ -52,27 +54,22 @@ public class ForecasterAppWidgetProvider extends AppWidgetProvider{
             final long now = new Date().getTime();
             final long twelveHours = 12 * 60 * 60 * 1000;
             if (now - storage.timestamp < twelveHours) {
-                final int forecastValue = (int)storage.forecastValue;
+                final int forecastValue = (int) storage.forecastValue;
 
                 if ( forecastValue >= 0 ){
-                    views.setTextViewText(R.id.forecaster_app_widget_percents, (int)storage.forecastValue + "%");
-                    if ( storage.forecastValue < 5 ){
-                        views.setTextColor(R.id.forecaster_app_widget_percents, context.getResources().getColor(R.color.red));
-                    } else if ( storage.forecastValue < 60) {
-                        views.setTextColor(R.id.forecaster_app_widget_percents, context.getResources().getColor(R.color.yellow));
-                    } else{
-                        views.setTextColor(R.id.forecaster_app_widget_percents, context.getResources().getColor(R.color.green));
-                    }
+                    views.setTextViewText(R.id.forecaster_app_widget_percents, forecastValue + "%");
+                    views.setTextColor(R.id.forecaster_app_widget_percents, ForecastAlgorithms.calculateForecastColor(forecastValue));
                 } else {
-                    views.setTextColor(R.id.forecaster_app_widget_percents, context.getResources().getColor(R.color.green));
+                    views.setTextColor(R.id.forecaster_app_widget_percents, Color.WHITE);
                     views.setTextViewText(R.id.forecaster_app_widget_percents, "?");
                 }
             } else{
-                views.setTextColor(R.id.forecaster_app_widget_percents, context.getResources().getColor(R.color.green));
+                views.setTextColor(R.id.forecaster_app_widget_percents, Color.WHITE);
                 views.setTextViewText(R.id.forecaster_app_widget_percents, "?");
             }
         }
         return views;
     }
+
 
 }

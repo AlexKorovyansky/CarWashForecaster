@@ -18,10 +18,11 @@
               android:layout_alignParentBottom="true"
               android:layout_centerHorizontal="true"
               android:textSize="25sp"
+              android:gravity="center_horizontal"
               android:background="#99000000"
               android:paddingRight="5dp"
               android:paddingLeft="5dp"
-              android:textColor="#00ff00"/>
+              android:textColor="@android:color/white"/>
 
     <ProgressBar android:id="@+id/forecaster_app_widget_progress"
                  style="?android:progressBarStyle"
