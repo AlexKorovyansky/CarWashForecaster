@@ -7,35 +7,28 @@
 
     <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="60dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_car_wash"/>
 
-    <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true">
+    <TextView android:id="@+id/forecaster_app_widget_percents"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="\?"
+              android:layout_alignParentBottom="true"
+              android:layout_centerHorizontal="true"
+              android:textSize="25sp"
+              android:background="#99000000"
+              android:paddingRight="5dp"
+              android:paddingLeft="5dp"
+              android:textColor="#00ff00"/>
 
-        <TextView android:id="@+id/forecaster_app_widget_percents"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="\?"
-                  android:paddingLeft="10dp"
-                  android:paddingRight="10dp"
-                  android:textSize="50sp"
-                  android:layout_margin="5dp"
-                  android:textColor="#00ff00"
-                  android:background="#bb000000"/>
-
-        <ProgressBar android:id="@+id/forecaster_app_widget_progress"
-                     style="?android:progressBarStyle"
-                     android:layout_width="50dp"
-                     android:layout_height="50dp"
-                     android:layout_gravity="center"
-                     android:visibility="gone"
-                     android:background="#bb000000"
-                />
-    </FrameLayout>
+    <ProgressBar android:id="@+id/forecaster_app_widget_progress"
+                 style="?android:progressBarStyle"
+                 android:layout_width="50dp"
+                 android:layout_height="50dp"
+                 android:layout_centerInParent="true"
+                 android:visibility="gone"/>
 
 
 </RelativeLayout>
