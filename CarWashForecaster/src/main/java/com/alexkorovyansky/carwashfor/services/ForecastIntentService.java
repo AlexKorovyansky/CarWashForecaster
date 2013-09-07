@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.alexkorovyansky.carwashfor.BuildConfig;
 import com.alexkorovyansky.carwashfor.ForecasterAppWidgetProvider;
 import com.alexkorovyansky.carwashfor.R;
 import com.alexkorovyansky.carwashfor.data.ForecastStorage;
@@ -47,6 +48,7 @@ public class ForecastIntentService extends Service {
         Log.v(TAG, "onCreate");
         mForecastRestAdapter = new RestAdapter.Builder()
                 .setServer("http://api.openweathermap.org")
+                .setDebug(BuildConfig.DEBUG)
                 .build();
         mForecastRestService = mForecastRestAdapter.create(ForecastRestService.class);
 
@@ -150,15 +152,19 @@ public class ForecastIntentService extends Service {
                     @Override
                     public void success(ForecastRestService.ForecastResponse response, Response rawResponse) {
                         if (response.code == 200) {
+                            Log.v(TAG, "getForecastForLocation -> response is ok");
                             mForecastStorage.forecastValue = calculateForecast(response);
                             mForecastStorage.timestamp = new Date().getTime();
                             mForecastStorage.save();
+                        } else {
+                            Log.v(TAG, "getForecastForLocation -> bad response code == " + response.code);
                         }
                         stopSelf();
                     }
 
                     @Override
                     public void failure(RetrofitError retrofitError) {
+                        Log.v(TAG, "getForecastForLocation -> failure " + retrofitError);
                         showToast(R.string.error_network);
                         stopSelf();
                     }

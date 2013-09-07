@@ -43,6 +43,6 @@ public interface ForecastRestService {
 
 
 
-    @GET("/data/2.1/forecast/city")
+    @GET("/data/2.5/forecast")
     void getForecast(@Query("lat") double lat, @Query("lon") double lon, Callback<ForecastResponse> callback);
 }

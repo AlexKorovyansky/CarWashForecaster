@@ -43,7 +43,7 @@ public class ForecastAlgorithms {
 
         final Map<Long, Float> resultMap = new HashMap<Long, Float>();
 
-        for ( ForecastRestService.ForecastResponse.Item item: response.items ) {
+        for (ForecastRestService.ForecastResponse.Item item: response.items) {
             final long date = (item.dt / secondsInDay) * secondsInDay;
             final float _3h = item.rainInfo == null ? 0.0f : item.rainInfo._3h;
 
