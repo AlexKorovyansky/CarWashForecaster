@@ -23,6 +23,7 @@ dependencies {
     compile 'com.android.support:support-v4:13.0.+'
     compile 'com.squareup.retrofit:retrofit:1.1.1'
     compile 'com.google.android.gms:play-services:3.1.36'
+    compile 'com.jakewharton.timber:timber:1.1.+'
 
     testLocalCompile 'junit:junit:4.8.2'
 }

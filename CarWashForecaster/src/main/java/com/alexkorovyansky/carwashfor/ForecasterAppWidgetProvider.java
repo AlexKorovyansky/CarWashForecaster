@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -16,15 +15,17 @@ import com.alexkorovyansky.carwashfor.services.ForecastIntentService;
 
 import java.util.Date;
 
+import timber.log.Timber;
+
 /**
  * @author Alex Korovyansky (korovyansk@gmail.com)
  */
 public class ForecasterAppWidgetProvider extends AppWidgetProvider{
 
-    public static final String TAG = ForecasterAppWidgetProvider.class.getSimpleName();
+    public static final Timber LOG = TimberInjector.inject();
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        Log.v(TAG, "onUpdate started");
+        LOG.d("onUpdate started");
         updateAllWidgets(context, appWidgetManager, appWidgetIds);
     }
 

@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CarWashForecaster/CarWashForecaster.iml" filepath="$PROJECT_DIR$/CarWashForecaster/CarWashForecaster.iml" />
       <module fileurl="file://$PROJECT_DIR$/CarWashForecaster/CarWashForecaster-CarWashForecaster.iml" filepath="$PROJECT_DIR$/CarWashForecaster/CarWashForecaster-CarWashForecaster.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CarWashForecasterProject.iml" filepath="$PROJECT_DIR$/CarWashForecasterProject.iml" />
     </modules>
   </component>
 </project>

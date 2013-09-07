@@ -9,12 +9,12 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.alexkorovyansky.carwashfor.BuildConfig;
 import com.alexkorovyansky.carwashfor.ForecasterAppWidgetProvider;
 import com.alexkorovyansky.carwashfor.R;
+import com.alexkorovyansky.carwashfor.TimberInjector;
 import com.alexkorovyansky.carwashfor.data.ForecastStorage;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -29,13 +29,14 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import timber.log.Timber;
 
 /**
  * @author Alex Korovyansky (korovyansk@gmail.com)
  */
 public class ForecastIntentService extends Service {
 
-    public static final String TAG = ForecastIntentService.class.getSimpleName();
+    public static final Timber LOG = TimberInjector.inject();
 
     private RestAdapter mForecastRestAdapter;
     private ForecastRestService mForecastRestService;
@@ -45,7 +46,7 @@ public class ForecastIntentService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.v(TAG, "onCreate");
+        LOG.d("onCreate");
         mForecastRestAdapter = new RestAdapter.Builder()
                 .setServer("http://api.openweathermap.org")
                 .setDebug(BuildConfig.DEBUG)
@@ -57,18 +58,18 @@ public class ForecastIntentService extends Service {
         mLocationClient = new LocationClient(this, new GooglePlayServicesClient.ConnectionCallbacks() {
             @Override
             public void onConnected(Bundle bundle) {
-                Log.v(TAG, "onConnected");
+                LOG.d("onConnected");
                 doStuff();
             }
 
             @Override
             public void onDisconnected() {
-                Log.v(TAG, "onDisconnected");
+                LOG.d("onDisconnected");
             }
         }, new GooglePlayServicesClient.OnConnectionFailedListener() {
             @Override
             public void onConnectionFailed(ConnectionResult connectionResult) {
-                Log.v(TAG, "onConnectionFailed");
+                LOG.d("onConnectionFailed");
                 showToast(R.string.error_google_play_services);
                 stopSelf();
 ;            }
@@ -89,7 +90,7 @@ public class ForecastIntentService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.v(TAG, "onDestroy");
+        LOG.d("onDestroy");
         if (mLocationClient.isConnected()) {
             mLocationClient.disconnect();
         }
@@ -104,23 +105,23 @@ public class ForecastIntentService extends Service {
         final long lastKnownLocationTime = lastKnownLocation == null ? -1 : lastKnownLocation.getTime();
         final long oneHourMs = 1000 * 60 * 60;
         if (now - lastKnownLocationTime < oneHourMs) {
-            Log.v(TAG, "doStuff --> location isFresh " + lastKnownLocation);
+            LOG.d("doStuff --> location isFresh " + lastKnownLocation);
             getForecastForLocation(lastKnownLocation);
         } else {
             if (isLocationSourcesAvailable()) {
-                Log.v(TAG, "doStuff --> will ask location");
+                LOG.d("doStuff --> will ask location");
                 final LocationRequest request = LocationRequest.create()
                         .setNumUpdates(1);
                 final LocationListener listener = new LocationListener() {
                     @Override
                     public void onLocationChanged(Location location) {
-                        Log.v(TAG, "doStuff --> got location");
+                        LOG.d("doStuff --> got location");
                         getForecastForLocation(location);
                     }
                 };
                 mLocationClient.requestLocationUpdates(request, listener);
             } else{
-                Log.v(TAG, "doStuff --> location sources are unavailable");
+                LOG.d("doStuff --> location sources are unavailable");
                 showToast(R.string.error_location);
                 stopSelf();
             }
@@ -152,19 +153,19 @@ public class ForecastIntentService extends Service {
                     @Override
                     public void success(ForecastRestService.ForecastResponse response, Response rawResponse) {
                         if (response.code == 200) {
-                            Log.v(TAG, "getForecastForLocation -> response is ok");
+                            LOG.d("getForecastForLocation -> response is ok");
                             mForecastStorage.forecastValue = calculateForecast(response);
                             mForecastStorage.timestamp = new Date().getTime();
                             mForecastStorage.save();
                         } else {
-                            Log.v(TAG, "getForecastForLocation -> bad response code == " + response.code);
+                            LOG.d("getForecastForLocation -> bad response code == " + response.code);
                         }
                         stopSelf();
                     }
 
                     @Override
                     public void failure(RetrofitError retrofitError) {
-                        Log.v(TAG, "getForecastForLocation -> failure " + retrofitError);
+                        LOG.d("getForecastForLocation -> failure " + retrofitError);
                         showToast(R.string.error_network);
                         stopSelf();
                     }
@@ -172,9 +173,9 @@ public class ForecastIntentService extends Service {
     }
     private float calculateForecast(ForecastRestService.ForecastResponse response){
         final float[] rainsArray = ForecastAlgorithms.calculateRainsArray(response);
-        Log.v(TAG, "calculateForecast --> rainsArray = " + Arrays.toString(rainsArray));
+        LOG.d("calculateForecast --> rainsArray = " + Arrays.toString(rainsArray));
         final float forecast = ForecastAlgorithms.makeForecast(rainsArray);
-        Log.v(TAG, "calculateForecast --> forecast = " + forecast);
+        LOG.d("calculateForecast --> forecast = " + forecast);
         return forecast;
     }
 
@@ -187,7 +188,7 @@ public class ForecastIntentService extends Service {
 
     private void showToast(int messageId){
         final String message = this.getResources().getString(messageId);
-        Log.w(TAG, message);
+        LOG.d(message);
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
