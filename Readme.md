@@ -3,6 +3,8 @@ Car Wash Forecaster
 
 Android application (App Widget) to simple answer the question, whether today is a good day for car wash or not?
 
+https://play.google.com/store/apps/details?id=com.alexkorovyansky.carwashfor
+
 Developed By
 ===================
 
